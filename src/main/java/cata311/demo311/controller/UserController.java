@@ -17,15 +17,14 @@ public class UserController {
     }
 
     @GetMapping()
-    public String AllUsers(Model model) {
+    public String allUsers(Model model) {
         model.addAttribute("users", userService.getUsers());
         return "allUsers";
     }
 
-    @GetMapping("/ID")
-    public String UserDetails(@RequestParam("id") Long id, Model model) {
+    @GetMapping("/id")
+    public String userDetails(@RequestParam("id") Long id, Model model) {
         model.addAttribute("user", userService.showUser(id));
-        System.out.println("ID" + id);
         return "userDetails";
     }
 
@@ -47,13 +46,13 @@ public class UserController {
         return "editUser";
     }
 
-    @PatchMapping("/Update")
+    @PostMapping("/update")
     public String updateUser(@ModelAttribute("user") User user, @RequestParam("id") Long id) {
         userService.updateUser(id, user);
         return "redirect:/";
     }
 
-    @DeleteMapping("DEL")
+    @PostMapping("/delete")
     public String deleteUser(@RequestParam("id") Long id) {
         userService.deleteUser(id);
         return "redirect:/";

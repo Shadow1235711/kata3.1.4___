@@ -11,7 +11,7 @@
     <p th:text="${user.getEmail}">Email</p>
 
 </div>
-<form th:method="DELETE" th:action="@{'/DEL?id={id}'(id=${user.getId()})}">
+<form th:method="POST" th:action="@{'/delete?id={id}'(id=${user.getId()})}">
     <input type="submit" value="Delete User"/>
 </form>
 <button
