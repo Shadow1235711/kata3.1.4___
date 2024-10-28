@@ -6,15 +6,29 @@
 </head>
 <body>
 
-<form th:method="POST" th:action="@{/}" th:object="${user}">
-    <label for="name">Enter Name: </label>
-    <input type="text" th:field="*{name}" id="name"/>
+<form th:method="POST" th:action="@{create}" th:object="${user}">
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name">
     <br/>
-    <label for="email">Enter Email: </label>
-    <input type="text" th:field="*{email}" id="email"/>
+    <label for="email">Enter email: </label>
+    <input type="text" th:field="*{email}" id="email">
+    <br/>
+    <label for="password">Enter password: </label>
+    <input type="password" th:field="*{password}" id="password">
+    <br/>
+    <label> Roles: </label>
+    <label>
+        <input type="" name="roles"
+               th:each="role : ${allRoles}"
+               th:text="${role.name}"
+               th:value="${role.id}"
+               th:field="*{roles}"
+        />
+    </label>
     <br/>
     <input type="submit" value="Add User"/>
 </form>
-
+<br/>
+<a th:href="@{/logout}">Logout</a>
 </body>
 </html>
