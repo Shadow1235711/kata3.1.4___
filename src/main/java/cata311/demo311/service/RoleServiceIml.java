@@ -18,4 +18,16 @@ public class RoleServiceIml implements RoleService {
     public List<Role> getAllRoles() {
         return roleRepository.findAll();
     }
+
+    @Override
+    public void saveRole(Role role) {
+        roleRepository.save(role);
+    }
+
+    @Override
+    public Role findRoleById(Long id) {
+        return roleRepository.getById(id);
+    }
+
+
 }
