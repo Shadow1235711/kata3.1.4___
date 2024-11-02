@@ -11,9 +11,19 @@
     <input type="hidden" th:field="*{id}" id="id">
     <label for="name">Enter name: </label>
     <input type="text" th:field="*{name}" id="name">
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error message</span><br/><br/>
+    <br/>
+    <label for="lastName">Enter lastName: </label>
+    <input type="text" th:field="*{lastName}" id="lastName">
+    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Error message</span><br/><br/>
+    <br/>
+    <label for="age">Enter age: </label>
+    <input type="text" th:field="*{age}" id="age">
+    <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Error message</span><br/><br/>
     <br/>
     <label for="email">Enter email: </label>
     <input type="text" th:field="*{email}" id="email">
+    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error message</span><br/><br/>
     <br/>
     <label for="password">Enter password: </label>
     <input type="password" th:field="*{password}" id="password">

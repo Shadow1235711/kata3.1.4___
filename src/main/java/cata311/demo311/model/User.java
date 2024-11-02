@@ -5,6 +5,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -16,10 +19,18 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
+    @Size(min = 3, max = 50,message = "имя должно быть от 3 до 50 символов в длину")
     private String name;
-
+    @Size(min = 3, max = 50,message = "фамилия должна быть от 3 до 50 символов в длину")
+    private String lastName;
+    @Min(value = 0,message = "Возраст не должен быть отрицательным")
+    private int age;
+    @Pattern(regexp = "^[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z]{1,3}",message = "почта должна соответствовать шаблону ххх@mail.ru")
     private String email;
+
+    public String getName() {
+        return this.name;
+    }
 
     private String password;
 
@@ -33,11 +44,29 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String name, String email, String password, List<Role> roles) {
+    public User(String name,String lastName,int age, String email, String password, List<Role> roles) {
         this.name = name;
+        this.lastName = lastName;
+        this.age = age;
         this.email = email;
         this.password = password;
         this.roles = roles;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Long getId() {
@@ -48,9 +77,6 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -92,7 +118,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return name;
+        return this.name;
     }
 
     @Override

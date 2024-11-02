@@ -7,6 +7,8 @@
 <body>
 <div>
     <p th:text="${users.getUsername()}">UserName</p>
+    <p th:text="${users.getLastName()}">LastName</p>
+    <p th:text="${users.getAge()}">Age[</p>
     <p th:text="${users.getEmail()}">Email</p>
 </div>
 <form th:method="POST" th:action="@{delete}">
