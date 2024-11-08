@@ -5,12 +5,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
@@ -18,19 +18,14 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Size(min = 3, max = 50,message = "имя должно быть от 3 до 50 символов в длину")
+    @NotNull
     private String name;
-    @Size(min = 3, max = 50,message = "фамилия должна быть от 3 до 50 символов в длину")
-    private String lastName;
-    @Min(value = 0,message = "Возраст не должен быть отрицательным")
-    private int age;
-    @Pattern(regexp = "^[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z]{1,3}",message = "почта должна соответствовать шаблону ххх@mail.ru")
-    private String email;
 
-    public String getName() {
-        return this.name;
-    }
+    private String lastName;
+
+    private int age;
+
+    private String email;
 
     private String password;
 
@@ -44,13 +39,20 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String name,String lastName,int age, String email, String password, List<Role> roles) {
+    public User(String name, String lastName, int age, String email, String password, List<Role> roles) {
         this.name = name;
         this.lastName = lastName;
         this.age = age;
         this.email = email;
         this.password = password;
         this.roles = roles;
+    }
+
+    public String getRole() {
+        return roles.stream()
+                .map(Role::getName)
+                .collect(Collectors.joining(", "));
+
     }
 
     public int getAge() {
@@ -77,6 +79,9 @@ public class User implements UserDetails {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -95,7 +100,7 @@ public class User implements UserDetails {
     }
 
 
-    public List<Role> getRoles() {
+    public Collection<Role> getRoles() {
         return roles;
     }
 
@@ -140,6 +145,19 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return age == user.age && Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(roles, user.roles);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, lastName, age, email, password, roles);
     }
 
     @Override

@@ -28,6 +28,12 @@ public class UserServiceIml implements UserService {
         return userRepository.findAll();
     }
 
+    @Override
+    public void add(User user) {
+        user.setPassword(encoder.encode(user.getPassword()));
+        userRepository.save(user);
+    }
+
     @Transactional
     @Override
     public User showUser(Long id) {
@@ -37,8 +43,10 @@ public class UserServiceIml implements UserService {
     @Transactional
     @Override
     public void updateUser(Long id, User user) {
-        user.setId(id);
-        user.setPassword(encoder.encode(user.getPassword()));
+        if (!user.getPassword().equals(showUser(user.getId()).getPassword())) {
+            user.setId(id);
+            user.setPassword(encoder.encode(user.getPassword()));
+        }
         userRepository.save(user);
     }
 
@@ -57,10 +65,10 @@ public class UserServiceIml implements UserService {
     @Transactional
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = findByName(username);
+        User user = userRepository.findByName(username);
         if (user == null) {
             throw new UsernameNotFoundException(String.format("User '%s' not found", username));
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.getAuthorities());
+        return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), user.getAuthorities());
     }
 }

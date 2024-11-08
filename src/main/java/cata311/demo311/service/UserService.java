@@ -9,6 +9,8 @@ import java.util.List;
 public interface UserService extends UserDetailsService {
     List<User> getUsers();
 
+    void add(User user);
+
     User showUser(Long id);
 
     void updateUser(Long id, User user);
