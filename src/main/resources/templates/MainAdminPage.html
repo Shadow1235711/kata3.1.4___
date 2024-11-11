@@ -250,17 +250,20 @@
                                                                        readonly/>
                                                             </div>
                                                             <div class="mb-3 text-center fw-bold">
-                                                                <label class="container-fluid "
-                                                                       for="rolesDelete">Role</label>
+                                                                <label class="container-fluid"
+                                                                       for="rolesUpdate">Role</label>
                                                                 <select class="form-control form-control-sm"
                                                                         id="rolesDelete" name="roles" multiple
-                                                                        th:value="${user.getRoles()}"
-                                                                        style="height: 50px; width: 300px; margin: 0 auto"
-                                                                        readonly>
-                                                                    <option value="2">USER</option>
-                                                                    <option selected="selected" value="1">ADMIN</option>
+                                                                        th:value="${user.getRole()}"
+                                                                        style="height: 50px; width: 300px; margin: 0 auto">
+                                                                    <option th:each="role : ${user.getRole()}"
+                                                                            th:value="${role}"
+                                                                            th:text="${role}"
+                                                                            th:selected="${role == 'ADMIN_ROLE'}">
+                                                                    </option>
                                                                 </select>
                                                             </div>
+
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
@@ -329,8 +332,8 @@
                                     <select class="form-control form-control-sm" name="roles" multiple
                                             th:value="${user.getRoles}"
                                             style="height: 50px; width: 300px; margin: 0 auto">
-                                        <option value="1">USER</option>
-                                        <option selected="selected" value="2">ADMIN</option>
+                                        <option value="2">USER</option>
+                                        <option selected="selected" value="1">ADMIN</option>
                                     </select>
                                     <br/>
                                     <div>
@@ -356,7 +359,7 @@
                             <th>LastName</th>
                             <th>Age</th>
                             <th>Email</th>
-                            <th>Roles</th>
+                            <th>Role</th>
                         </tr>
                         </thead>
                         <tbody>

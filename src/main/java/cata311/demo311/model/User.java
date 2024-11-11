@@ -48,11 +48,10 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public String getRole() {
+    public List<String> getRole() {
         return roles.stream()
                 .map(Role::getName)
-                .collect(Collectors.joining(", "));
-
+                .collect(Collectors.toList());
     }
 
     public int getAge() {

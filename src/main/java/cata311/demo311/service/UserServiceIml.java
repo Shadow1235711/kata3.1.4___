@@ -3,6 +3,7 @@ package cata311.demo311.service;
 import cata311.demo311.Repository.UserRepository;
 import cata311.demo311.model.User;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,7 +17,7 @@ public class UserServiceIml implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
 
-    UserServiceIml(UserRepository userRepository, @Lazy PasswordEncoder encoder) {
+    public UserServiceIml(UserRepository userRepository, @Lazy PasswordEncoder encoder) {
         this.encoder = encoder;
         this.userRepository = userRepository;
     }
@@ -54,6 +55,20 @@ public class UserServiceIml implements UserService {
     @Override
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Transactional
+    @Override
+    public User getAuthUser() {
+        UserDetails userDetails =
+                (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long idOfAuthUser = Long.valueOf(1);
+        if (findByName(userDetails.getUsername()) != null) {
+            idOfAuthUser = findByName(userDetails.getUsername()).getId();
+            return findByName(userDetails.getUsername());
+        } else {
+            return showUser(idOfAuthUser);
+        }
     }
 
     @Transactional
