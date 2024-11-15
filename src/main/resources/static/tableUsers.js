@@ -1,4 +1,4 @@
-const URLTableUsers = 'http://localhost:8080/api/admin/users';
+const URLTableUsers = 'http://localhost:8080/api/admin/users/';
 
 getAllUsers();
 
@@ -42,7 +42,7 @@ function getAllUsers() {
                             class="btn btn-danger" 
                             data-toggle="modal" 
                             data-target="#deleteModal" 
-                            onclick="deleteModal(${users.id})">
+                            onclick="deleteModal(${user.id})">
                                 Delete
                             </button>
                         </td>

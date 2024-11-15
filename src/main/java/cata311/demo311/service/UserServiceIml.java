@@ -29,16 +29,17 @@ public class UserServiceIml implements UserService {
         return userRepository.findAll();
     }
 
+    @Transactional
     @Override
     public void add(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
-    @Transactional
+
     @Override
     public User showUser(Long id) {
-        return userRepository.getById(id);
+        return userRepository.findById(id).get();
     }
 
     @Transactional
@@ -51,10 +52,14 @@ public class UserServiceIml implements UserService {
         userRepository.save(user);
     }
 
-    @Transactional
+
     @Override
-    public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+    public boolean deleteUser(Long id) {
+        if (userRepository.findById(id).isPresent()) {
+            userRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
     @Transactional

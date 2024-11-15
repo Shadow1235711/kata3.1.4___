@@ -1,4 +1,4 @@
-import { Modal } from 'bootstrap'; // Импорт класса Modal
+// Импорт класса Modal
 let formEdit = document.forms["formEdit"];
 editUser();
 

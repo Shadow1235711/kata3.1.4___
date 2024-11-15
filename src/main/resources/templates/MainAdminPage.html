@@ -54,7 +54,7 @@
 
                 <div class="tab-pane fade show active" id="adminPanel" role="tabpanel">
 
-                    <p class="fw-normal fs-4">Admin panel</p>
+                    <p class=" fw-bolder fs-1">Admin panel</p>
 
                     <nav>
                         <ul class="nav nav-tabs">
@@ -223,13 +223,13 @@
                                                         </div>
 
                                                         <div class="mb-3">
-                                                            <label for="delete-surname">
+                                                            <label for="delete-lastName">
                                                                 <b>Last Name</b>
                                                             </label>
                                                             <input class="form-control"
-                                                                   name="surname"
+                                                                   name="lastName"
                                                                    type="text"
-                                                                   id="delete-surname"
+                                                                   id="delete-lastName"
                                                                    disabled/>
                                                         </div>
 
@@ -245,13 +245,13 @@
                                                         </div>
 
                                                         <div class="mb-3">
-                                                            <label for="delete-username">
-                                                                <b>username</b>
+                                                            <label for="delete-email">
+                                                                <b>Email</b>
                                                             </label>
                                                             <input class="form-control"
-                                                                   name="username"
+                                                                   name="email"
                                                                    type="text"
-                                                                   id="delete-username"
+                                                                   id="delete-email"
                                                                    disabled/>
                                                         </div>
 
@@ -295,30 +295,30 @@
                         <div class="tab-pane fade" id="newUser" role="tabpanel"
                              aria-labelledby="nav-new_user-tab">
 
-                            <p>Add new user</p>
+                            <p id="myParagraph" style="margin-left: 10px;font-weight: bold; font-size: 1.2em;">Add new user</p>
 
-                            <div class="d-flex justify-content-center align-items-center container">
+                            <div class="d-flex justify-content-center text-center align-items-center container">
                                 <div class="row">
                                     <form id="formNew">
 
-                                        <div class="mb-3">
-                                            <label for="create-username"
-                                                   class="form-label fw-normal"><b>name</b></label>
+                                        <div class="mb-3 ">
+                                            <label for="create-name"
+                                                   class="form-label fw-normal "><b>First Name</b></label>
                                             <input type="text" class="form-control"
-                                                   id="create-username"
-                                                   placeholder="username"
-                                                   name="username"
+                                                   id="create-name"
+                                                   placeholder="First Name"
+                                                   name="name"
                                                    required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="create-surname"
+                                            <label for="create-lastName"
                                                    class="form-label fw-normal">
-                                                <b>surname</b>
+                                                <b>Last Name</b>
                                             </label>
                                             <input type="text" class="form-control"
-                                                   id="create-surname"
-                                                   placeholder="surname"
-                                                   name="surname"
+                                                   id="create-lastName"
+                                                   placeholder="Last Name"
+                                                   name="lastName"
                                                    required>
                                         </div>
                                         <div class="mb-3">
@@ -335,11 +335,11 @@
                                         <div class="mb-3">
                                             <label for="create-email"
                                                    class="form-label fw-normal">
-                                                <b>email</b>
+                                                <b>Email</b>
                                             </label>
                                             <input type="email" class="form-control"
                                                    id="create-email"
-                                                   placeholder="email"
+                                                   placeholder="Email"
                                                    name="email"
                                                    required>
                                         </div>
@@ -353,16 +353,15 @@
                                                    name="password"
                                                    placeholder="Password" required>
                                         </div>
-                                        <span><b>Role</b></span>
-                                        <select class="form-select"
-                                                aria-label="Default select example"
-                                                id="create-roles"
-                                                name="roles"
-                                                required>
-
-                                        </select>
+                                        <div class="mb-3">
+                                            <label for="create-roles"><b>Role</b></label>
+                                            <select multiple size="2"
+                                                    class="form-control"
+                                                    id="create-roles" name="roles" required>
+                                            </select>
+                                        </div>
                                         <br>
-                                        <input class="btn btn-info" type="submit" value="Add new user"/>
+                                        <input class="btn btn-success" type="submit" value="Add new user"/>
                                     </form>
                                 </div>
                             </div>
@@ -407,7 +406,7 @@
 <script type="text/javascript" src="/tableUsers.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>
